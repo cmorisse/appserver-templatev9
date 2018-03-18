@@ -24,11 +24,10 @@ function install_openerp {
         echo "So you must either use bin/buildout to update or launch \"install.sh reset\" to remove all buildout installed items."
         exit -1
     fi
-    wget https://raw.github.com/buildout/buildout/master/bootstrap/bootstrap.py
     virtualenv py27
-    py27/bin/python bootstrap.py
-    py27/bin/pip install $PYPI_INDEX --allow-all-external --allow-unverified bzr bzr==2.6.0
-    bin/buildout install
+    py27/bin/pip install setuptools==33.1.1
+    py27/bin/pip install zc.buildout
+    py27/bin/buildout install
     echo
     echo "Your commands are now available in ./bin"
     echo "Python is in ./py27. Don't forget to launch source py27/bin/activate"
@@ -79,7 +78,7 @@ COMMAND=${@:$OPTIND:1}
 
 echo
 echo "install.sh - Inouk OpenERP Buildout Installer"
-echo "(c) 2013, 2014, 2015 @cmorisse"
+echo "(c) 2013-2018 @cmorisse"
 
 if [[ $COMMAND == "help"  ||  $HELP == 1 ]]; then
     echo "Available commands:"
